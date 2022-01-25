@@ -1,5 +1,5 @@
 const ping = require('./ping');
 
-modules.export = {
+module.exports = {
   ping,
 };

@@ -11,6 +11,6 @@ const crossOriginResourceSharing = cors();
 app.use(crossOriginResourceSharing);
 app.use(bodyParseJson);
 
-app.get('/ping', router.ping);
+app.use('/ping', router.ping);
 
 module.exports = app;

@@ -12,5 +12,6 @@ app.use(crossOriginResourceSharing);
 app.use(bodyParseJson);
 
 app.use('/ping', router.ping);
+app.use('/login', router.login);
 
 module.exports = app;

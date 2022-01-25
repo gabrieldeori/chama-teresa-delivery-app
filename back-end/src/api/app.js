@@ -1,7 +1,12 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const cors = requier('cors');
 
 const app = express();
+const bodyParseJson = bodyParser.json();
+const crossOriginResourceSharing = cors();
 
-app.get('/coffee', (_req, res) => res.status(418).end());
+app.use(crossOriginResourceSharing);
+app.use(bodyParseJson);
 
 module.exports = app;

@@ -7,7 +7,7 @@ const router = Router();
 
 router.get(
   '/',
-  controllers.ping,
+  controllers.login,
   middlewares.error,
   );
 

@@ -5,7 +5,11 @@ const errors = {
     error: { success: false, message: 'Erro no banco de dados', data: null },
     statusCode: status.INTERNAL_SERVER_ERROR,
   },
-  invalidPassword: {
+  incorrectPassword: {
+    error: { success: false, message: 'Senha incorreta', data: null },
+    statusCode: status.UNAUTHORIZED,
+  },
+  invalidEmail: {
     error: { success: false, message: 'Senha incorreta', data: null },
     statusCode: status.UNAUTHORIZED,
   },

@@ -21,7 +21,7 @@ async function login({ email, password }) {
   const userExists = await models.User.findOne({ where: { email } });
   if (!userExists) return errors.userNonexistent;
   const md5Password = md5(password);
-  if (md5Password !== userExists.password) return errors.invalidPassword;
+  if (md5Password !== userExists.password) return errors.incorrectPassword;
   const { name, role, dataValues: { id } } = userExists;
   const dataToToken = { email, name, role };
   const token = authorization.create(dataToToken);

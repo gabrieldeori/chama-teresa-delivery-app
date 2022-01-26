@@ -10,8 +10,16 @@ const errors = {
     statusCode: status.UNAUTHORIZED,
   },
   invalidEmail: {
-    error: { success: false, message: 'Senha incorreta', data: null },
-    statusCode: status.UNAUTHORIZED,
+    error: { success: false, message: 'Email inválido', data: null },
+    statusCode: status.BAD_REQUEST,
+  },
+  invalidName: {
+    error: { success: false, message: 'Nome inválido', data: null },
+    statusCode: status.BAD_REQUEST,
+  },
+  invalidPassword: {
+    error: { success: false, message: 'Password inválido', data: null },
+    statusCode: status.BAD_REQUEST,
   },
   internalServerError: {
     error: { success: false, message: 'Erro interno do servidor', data: null },

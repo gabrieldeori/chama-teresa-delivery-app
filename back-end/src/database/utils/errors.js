@@ -4,6 +4,8 @@ const errors = {
   dbError: { error: 'Erro no banco de dados', status: status.INTERNAL_SERVER_ERROR },
   invalidPassword: { error: 'Senha incorreta', statusCode: status.UNAUTHORIZED },
   noProducts: { error: 'Nenhum produto cadastrado', statusCode: status.NOT_FOUND },
+  tokenNotFound: { error: 'Token não encontrado', statusCode: status.UNAUTHORIZED },
+  tokenInvalidOrExpired: { error: 'Token inválido ou expirado', statusCode: status.UNAUTHORIZED },
   userNonexistent: { error: 'Usuário não existe', statusCode: status.NOT_FOUND },
   userExists: { error: 'Usuário já existe', statusCode: status.CONFLICT },
 };

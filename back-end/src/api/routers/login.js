@@ -7,7 +7,7 @@ const router = Router();
 
 router.get(
   '/',
-  controllers.login,
+  controllers.user.login,
   middlewares.error,
   );
 

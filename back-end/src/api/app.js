@@ -14,5 +14,6 @@ app.use(bodyParseJson);
 app.use('/ping', router.ping);
 app.use('/login', router.login);
 app.use('/register', router.register);
+app.use('/products', router.products);
 
 module.exports = app;

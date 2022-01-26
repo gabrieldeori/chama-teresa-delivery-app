@@ -5,7 +5,7 @@ const middlewares = require('../../database/middlewares');
 
 const router = Router();
 
-router.get(
+router.post(
   '/',
   controllers.user.login,
   middlewares.error,

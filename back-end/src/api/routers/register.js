@@ -7,6 +7,7 @@ const router = Router();
 
 router.post(
   '/',
+  middlewares.validate.register,
   controllers.user.register,
   middlewares.error,
   );

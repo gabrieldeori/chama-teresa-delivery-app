@@ -1,5 +1,5 @@
 const services = require('../services');
-const { status } = require('../utils');
+const { errors } = require('../utils');
 
 async function login(req, res, nex) {
   try {
@@ -10,8 +10,8 @@ async function login(req, res, nex) {
     return res.status(response.statusCode).json(response.sendToFrontEnd);
   } catch (e) {
     console.log(e);
-    return nex({ error: e, status: status.INTERNAL_SERVER_ERROR });
   }
+  return nex(errors.internalServerError);
 }
 
 async function register(req, res, nex) {
@@ -20,11 +20,11 @@ async function register(req, res, nex) {
     const dataToCreateUser = { name, email, password };
     const response = await services.users.create(dataToCreateUser);
     if (!response || response.error) nex(response);
-    res.status(response.statusCode).json(response.sendToFrontEnd);
+    return res.status(response.statusCode).json(response.sendToFrontEnd);
   } catch (e) {
     console.log(e);
-    return nex({ error: e, status: status.INTERNAL_SERVER_ERROR });
   }
+  return nex(errors.internalServerError);
 }
 
 module.exports = {

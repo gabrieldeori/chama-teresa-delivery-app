@@ -1,13 +1,38 @@
 const status = require('./status');
 
 const errors = {
-  dbError: { error: 'Erro no banco de dados', status: status.INTERNAL_SERVER_ERROR },
-  invalidPassword: { error: 'Senha incorreta', statusCode: status.UNAUTHORIZED },
-  noProducts: { error: 'Nenhum produto cadastrado', statusCode: status.NOT_FOUND },
-  tokenNotFound: { error: 'Token não encontrado', statusCode: status.UNAUTHORIZED },
-  tokenInvalidOrExpired: { error: 'Token inválido ou expirado', statusCode: status.UNAUTHORIZED },
-  userNonexistent: { error: 'Usuário não existe', statusCode: status.NOT_FOUND },
-  userExists: { error: 'Usuário já existe', statusCode: status.CONFLICT },
+  dbError: {
+    error: { success: false, message: 'Erro no banco de dados', data: null },
+    statusCode: status.INTERNAL_SERVER_ERROR,
+  },
+  invalidPassword: {
+    error: { success: false, message: 'Senha incorreta', data: null },
+    statusCode: status.UNAUTHORIZED,
+  },
+  internalServerError: {
+    error: { success: false, message: 'Erro interno do servidor', data: null },
+    statusCode: status.INTERNAL_SERVER_ERROR,
+  },
+  noProducts: {
+    error: { success: false, message: 'Nenhum produto cadastrado', data: null },
+    statusCode: status.NOT_FOUND,
+  },
+  tokenNotFound: {
+    error: { success: false, message: 'Token não encontrado', data: null },
+    statusCode: status.UNAUTHORIZED,
+  },
+  tokenInvalidOrExpired: {
+    error: { success: false, message: 'Token inválido ou expirado', data: null },
+    statusCode: status.UNAUTHORIZED,
+  },
+  userExists: {
+    error: { success: false, message: 'Usuário já existe', data: null },
+    statusCode: status.CONFLICT,
+  },
+  userNonexistent: {
+    error: { success: false, message: 'Usuário não existe', data: null },
+    statusCode: status.NOT_FOUND,
+  },
 };
 
 module.exports = errors;

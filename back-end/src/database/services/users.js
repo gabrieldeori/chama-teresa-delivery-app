@@ -12,7 +12,8 @@ async function create({ name, email, password }) {
   if (!id) return errors.dbError;
   const dataToToken = { email, name, role };
   const token = authorization.create(dataToToken);
-  const sendToFrontEnd = { id, token, ...dataToToken };
+  const data = { id, token, ...dataToToken };
+  const sendToFrontEnd = { success: true, message: 'Usuário cadastrado', data };
   return { sendToFrontEnd, statusCode: status.CREATED };
 }
 
@@ -24,7 +25,8 @@ async function login({ email, password }) {
   const { name, role, dataValues: { id } } = userExists;
   const dataToToken = { email, name, role };
   const token = authorization.create(dataToToken);
-  const sendToFrontEnd = { id, token, ...dataToToken };
+  const data = { id, token, ...dataToToken };
+  const sendToFrontEnd = { success: true, message: 'Sessão iniciada', data };
   return { sendToFrontEnd, statusCode: status.OK };
 }
 

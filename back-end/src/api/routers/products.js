@@ -7,6 +7,7 @@ const router = Router();
 
 router.get(
   '/',
+  middlewares.authenticate,
   controllers.products.getAll,
   middlewares.error,
   );

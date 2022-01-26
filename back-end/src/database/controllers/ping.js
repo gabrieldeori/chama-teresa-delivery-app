@@ -1,5 +1,5 @@
 const services = require('../services');
-const { errors } = require('../utils');
+const utils = require('../utils');
 
 async function ping(_req, res, nex) { // Async Await caso seja necessário esperar resposta. :)
   try {
@@ -12,7 +12,7 @@ async function ping(_req, res, nex) { // Async Await caso seja necessário esper
   } catch (e) {
     console.log(e);
   }
-  return nex(errors.internalServerError);
+  return nex(utils.errors.internalServerError);
 }
 
 module.exports = ping;

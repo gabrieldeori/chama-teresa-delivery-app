@@ -1,5 +1,5 @@
 const services = require('../services');
-const { errors } = require('../utils');
+const utils = require('../utils');
 
 async function login(req, res, nex) {
   try {
@@ -11,7 +11,7 @@ async function login(req, res, nex) {
   } catch (e) {
     console.log(e);
   }
-  return nex(errors.internalServerError);
+  return nex(utils.errors.internalServerError);
 }
 
 async function register(req, res, nex) {
@@ -24,7 +24,7 @@ async function register(req, res, nex) {
   } catch (e) {
     console.log(e);
   }
-  return nex(errors.internalServerError);
+  return nex(utils.errors.internalServerError);
 }
 
 module.exports = {

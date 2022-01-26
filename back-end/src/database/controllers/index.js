@@ -1,7 +1,9 @@
-const user = require('./user');
 const ping = require('./ping');
+const products = require('./products');
+const user = require('./user');
 
 module.exports = {
-  user,
   ping,
+  products,
+  user,
 };

@@ -32,7 +32,7 @@ describe('> Requisição sem enviar body', () => {
     }
   });
 
-  it('Deve retornar status 500 de BAD REQUEST', async () => {
+  it('Deve retornar status 400 de BAD REQUEST', async () => {
     expect(request.status).to.be.equals(status.BAD_REQUEST);
   });
 
@@ -55,7 +55,7 @@ describe('> Requisição enviando apenas um email válido', () => {
     }
   });
 
-  it('Deve retornar status 500 de BAD REQUEST', async () => {
+  it('Deve retornar status 400 de BAD REQUEST', async () => {
     expect(request.status).to.be.equals(status.BAD_REQUEST);
   });
 
@@ -78,7 +78,7 @@ describe('> Email com @ no começo', () => {
     }
   });
 
-  it('Deve retornar status 500 de BAD REQUEST', async () => {
+  it('Deve retornar status 400 de BAD REQUEST', async () => {
     expect(request.status).to.be.equals(status.BAD_REQUEST);
   });
 
@@ -101,7 +101,7 @@ describe('> Email sem @', () => {
     }
   });
 
-  it('Deve retornar status 500 de BAD REQUEST', async () => {
+  it('Deve retornar status 400 de BAD REQUEST', async () => {
     expect(request.status).to.be.equals(status.BAD_REQUEST);
   });
 
@@ -124,7 +124,7 @@ describe('> Email sem "."', () => {
     }
   });
 
-  it('Deve retornar status 500 de BAD REQUEST', async () => {
+  it('Deve retornar status 400 de BAD REQUEST', async () => {
     expect(request.status).to.be.equals(status.BAD_REQUEST);
   });
 
@@ -180,7 +180,7 @@ describe('> Email e senha válidos mas senha incorreta.', () => {
     await insertedUser.destroy();
   })
 
-  it('Deve retornar status 400 de UNAUTHORIZED', async () => {
+  it('Deve retornar status 401 de UNAUTHORIZED', async () => {
     expect(request.status).to.be.equals(status.UNAUTHORIZED);
   });
 

@@ -216,6 +216,6 @@ describe('> Email e senha válidos e login bem sucedido.', () => {
     const { body: { success, message, data } } = request;
     expect(success).to.be.equals(true);
     expect(message).to.be.equals('Sessão iniciada');
-    expect(data.token).not.to.equal(null);
+    expect(data.token).not.equal(null);
   });
 });

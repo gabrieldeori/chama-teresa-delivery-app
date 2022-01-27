@@ -19,9 +19,6 @@ const newUser = {
   role: 'customer',
 };
 
-// describe('> ', async () => { });
-// it('', async () => {});
-
 describe('> Requisição sem enviar body', () => {
   before( async () => {
     try {

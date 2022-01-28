@@ -1,0 +1,54 @@
+.navbar-container {
+  background-color: rgb(3, 107, 82);
+  display: flex;
+  height: 8vh;
+  width: 100vw;
+}
+
+.navbar-container section, button {
+  color: rgb(242, 255, 252);
+  letter-spacing: 0.05em;
+}
+
+.navbar-container button {
+  background-color: rgb(3, 107, 82);
+  border: none;
+}
+
+.navbar-redirect-button button {
+  font-size: 1.5em;
+  font-variant-caps: all-petite-caps;
+  font-weight: 700;
+  width: 20vw;
+}
+
+.navbar-redirect-button button:hover {
+  background-color: rgb(47, 193, 140);
+}
+
+.navbar-redirect-button {
+  display: flex;
+  width: 65vw;
+}
+
+.navbar-username-logout {
+  display: flex;
+  justify-content: flex-end;
+  width: 35vw;
+}
+
+.navbar-username-logout section:nth-child( 1 ) {
+  align-items: center;
+  background-color: rgb(66, 25, 129);
+  display: flex;
+  font-size: 1.5em;
+  justify-content: center;
+  text-align: center;
+  width: 20vw;
+}
+
+.navbar-username-logout button:nth-child( 2 ) {
+  background-color: rgb(5, 107, 250);
+  font-size: 1.3em;
+  width: 9vw;
+}

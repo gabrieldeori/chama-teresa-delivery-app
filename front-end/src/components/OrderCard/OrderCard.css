@@ -1,0 +1,59 @@
+.order-card-container {
+  background: rgba(234, 241, 239, 1);
+  border: 1px solid rgba(177, 194, 190, 1);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  display: flex;
+  text-align: center;
+  width: 40vh;
+}
+
+.order-id {
+  align-items: center;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  justify-content: center;
+  padding: 15px;
+}
+
+.order-middle-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 5px;
+}
+
+.order-middle-top {
+  align-items: center;
+  display: flex;
+  font-weight: 700;
+  height: 100%;
+  justify-content: center;
+}
+
+.order-middle-bottom {
+  padding: 5px;
+}
+
+.order-date-total-price {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 5px;
+}
+
+.order-date-total-price p {
+  background: rgba(242, 255, 252, 0.75);
+  border-radius: 5px;
+  padding: 8px;
+  text-align: center;
+}
+
+.delivery-status {
+  align-items: center;
+  border-radius: 5px;
+  display: flex;
+  height: 100%;
+  padding: 10px;
+}

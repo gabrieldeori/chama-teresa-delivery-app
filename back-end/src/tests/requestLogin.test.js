@@ -1,7 +1,9 @@
 const chai = require('chai');
 const chaiHTTP = require('chai-http');
 const { expect } = require('chai');
+const { stub } = require('sinon');
 
+const services = require('../database/services');
 const models = require('../database/models');
 const { status } = require('../database/utils');
 
@@ -145,7 +147,7 @@ describe('> Email e senha válidos mas email não existente.', () => {
     }
   });
 
-  afterEach(async () => {
+  after(async () => {
     await insertedUser.destroy();
   })
 
@@ -173,7 +175,7 @@ describe('> Email e senha válidos mas senha incorreta.', () => {
     }
   });
 
-  afterEach(async () => {
+  after(async () => {
     await insertedUser.destroy();
   })
 
@@ -201,7 +203,7 @@ describe('> Email e senha válidos e login bem sucedido.', () => {
     }
   });
 
-  afterEach(async () => {
+  after(async () => {
     await insertedUser.destroy();
   })
 
@@ -214,5 +216,40 @@ describe('> Email e senha válidos e login bem sucedido.', () => {
     expect(success).to.be.equals(true);
     expect(message).to.be.equals('Sessão iniciada');
     expect(data.token).not.equal(null);
+  });
+});
+
+describe('> Erro no services.', () => {
+  let serviceStub;
+  before( async () => {
+    serviceStub = stub(services.users, 'login');
+    serviceStub.resolves({
+      error: { success: false, message: 'Erro interno do servidor', data: null },
+      statusCode: status.INTERNAL_SERVER_ERROR,
+    });
+    try {
+      insertedUser = await models.User.create(newUser);
+      request = await chai.request(app)
+        .post('/login')
+        .send({ email: 'valid@mail.ok', password: '123456' });
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+  after(async () => {
+    await insertedUser.destroy();
+    serviceStub.restore();
+  })
+
+  it('Deve retornar status 500 de "INTERNAL SERVER ERROR"', async () => {
+    expect(request.status).to.be.equals(status.INTERNAL_SERVER_ERROR);
+  });
+
+  it('Deve retornar estrutura correta de { success, message e data }', async () => {
+    const { body: { success, message, data } } = request;
+    expect(success).to.be.equals(false);
+    expect(message).to.be.equals('Erro interno do servidor');
+    expect(data).to.be.equals(null);
   });
 });

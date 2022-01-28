@@ -18,7 +18,7 @@ describe('> Tentando registrar com nome inválido', () => {
       request = await chai.request(app)
         .post('/register')
         .send({
-          name: 'Nome Válido Teste',
+          name: 'Nome',
           email: 'mail',
           password: '123456',
         });
@@ -34,7 +34,7 @@ describe('> Tentando registrar com nome inválido', () => {
   it('Deve retornar estrutura correta de { success, message e data }', async () => {
     const { body: { success, message, data } } = request;
     expect(success).to.be.equals(false);
-    expect(message).to.be.equals('Email inválido');
+    expect(message).to.be.equals('Nome inválido');
     expect(data).to.be.equals(null);
   });
 });
@@ -182,6 +182,108 @@ describe('> Erro no servidor', () => {
     const { body: { success, message, data } } = request;
     expect(success).to.be.equals(false);
     expect(message).to.be.equals('Erro interno do servidor');
+    expect(data).to.be.equals(null);
+  });
+});
+
+describe('> Erro ao procurar user no servidor', () => {
+  let findAllStub;
+  before( async () => {
+    error = new Error(">> FAKE findAll error <<");
+    findAllStub = stub(models.User, 'findAll').throws(error);
+    try {
+      request = await chai.request(app)
+        .post('/register')
+        .send({
+          name: 'Nome Válido Teste',
+          email: 'valid1@mail.ok',
+          password: '123456',
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+  after( async () => {
+    findAllStub.restore();
+  });
+
+  it('Deve retornar status 500 de "INTERNAL SERVER ERROR"', async () => {
+    expect(request.status).to.be.equals(status.INTERNAL_SERVER_ERROR);
+  });
+
+  it('Deve retornar estrutura correta de { success, message e data }', async () => {
+    const { body: { success, message, data } } = request;
+    expect(success).to.be.equals(false);
+    expect(message).to.be.equals('Erro interno do servidor');
+    expect(data).to.be.equals(null);
+  });
+});
+
+describe('> INTERNAL ERROR ao cadastrar user no servidor', () => {
+  let createStub;
+  before( async () => {
+    error = new Error(">> FAKE create error <<");
+    createStub = stub(models.User, 'create').throws(error);
+    try {
+      request = await chai.request(app)
+        .post('/register')
+        .send({
+          name: 'Nome Válido Teste',
+          email: 'valid4@mail.ok',
+          password: '123456',
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+  after( async () => {
+    createStub.restore();
+  });
+
+  it('Deve retornar status 500 de "INTERNAL SERVER ERROR"', async () => {
+    expect(request.status).to.be.equals(status.INTERNAL_SERVER_ERROR);
+  });
+
+  it('Deve retornar estrutura correta de { success, message e data }', async () => {
+    const { body: { success, message, data } } = request;
+    expect(success).to.be.equals(false);
+    expect(message).to.be.equals('Erro interno do servidor');
+    expect(data).to.be.equals(null);
+  });
+});
+
+describe('> No ID on create user', () => {
+  let createStub;
+  before( async () => {
+    createStub = stub(models.User, 'create');
+    createStub.resolves({});
+    try {
+      request = await chai.request(app)
+        .post('/register')
+        .send({
+          name: 'Nome Válido Teste',
+          email: 'valid4@mail.ok',
+          password: '123456',
+        });
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+  after( async () => {
+    createStub.restore();
+  });
+
+  it('Deve retornar status 500 de "INTERNAL SERVER ERROR"', async () => {
+    expect(request.status).to.be.equals(status.INTERNAL_SERVER_ERROR);
+  });
+
+  it('Deve retornar estrutura correta de { success, message e data }', async () => {
+    const { body: { success, message, data } } = request;
+    expect(success).to.be.equals(false);
+    expect(message).to.be.equals('Erro no banco de dados');
     expect(data).to.be.equals(null);
   });
 });

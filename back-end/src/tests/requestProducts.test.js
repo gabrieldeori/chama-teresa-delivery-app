@@ -142,3 +142,43 @@ describe('> Testando request que não retorna produtos', () => {
     expect(data).to.be.equal(null);
   });
 });
+
+describe('> INTERNAL ERROR ao procurar no server', () => {
+  let findAllStub;
+  before( async () => {
+    insertedUser = await models.User.create(newUser);
+    error = new Error(">> FAKE findAll error <<");
+    findAllStub = stub(models.Product, 'findAll').throws(error);
+    try {
+      const token = await chai.request(app)
+        .post('/login')
+        .send({
+          email: 'valid@mail.ok',
+          password: '123456'
+        })
+        .then((res) => res.body.data.token);
+
+      request = await chai.request(app)
+        .get('/products')
+        .set('authorization', token);
+    } catch (e) {
+      console.log(e);
+    }
+  });
+
+  after(async () => {
+    await insertedUser.destroy();
+    findAllStub.restore();
+  })
+
+  it('Deve retornar status 500 de "INTERNAL SERVER ERROR"', async () => {
+    expect(request.status).to.be.equals(status.INTERNAL_SERVER_ERROR);
+  });
+
+  it('Deve retornar estrutura correta de { success, message e data }', async () => {
+    const { body: { success, message, data } } = request;
+    expect(success).to.be.equals(false);
+    expect(message).to.be.equals('Erro interno do servidor');
+    expect(data).to.be.equals(null);
+  });
+});

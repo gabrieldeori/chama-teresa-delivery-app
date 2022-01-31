@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import dataTestIds from '../../data/dataTestIds';
-
-const OrderStatus = ({ status, index }) => {
+const OrderStatus = ({ status, testId }) => {
   const style = {
     pendente: 'rgba(204, 184, 0, 0.75)',
     preparando: 'rgba(102, 204, 0, 0.75)',
@@ -15,19 +13,19 @@ const OrderStatus = ({ status, index }) => {
   return (
     <div
       className="delivery-status"
-      style={ { backgroundColor: style[status] } }
-      data-testid={ `${dataTestIds['34']}${index}` }
+      style={ { backgroundColor: style[status.toLowerCase()] } }
+      data-testid={ testId }
     >
       { formattedStatus }
     </div>
   );
 };
 
-const { string, number } = PropTypes;
+const { string } = PropTypes;
 
 OrderStatus.propTypes = {
   status: string.isRequired,
-  index: number.isRequired,
+  testId: string.isRequired,
 };
 
 export default OrderStatus;

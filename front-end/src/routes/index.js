@@ -6,6 +6,7 @@ const AppRoutes = () => (
   <Routes>
     <Route path="/customer/products" element={ Pages.CustomerProducts() } />
     <Route path="/customer/checkout" element={ Pages.CustomerCheckout() } />
+    <Route path="/customer/orders" element={ Pages.CustomerOrders() } />
   </Routes>
 );
 

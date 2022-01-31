@@ -1,34 +1,39 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import OrderStatus from './OrderStatus';
-import './OrderCard.css';
+import './style.css';
 
-import dataTestIds from '../../data/dataTestIds';
-import pad from '../../helpers/pad';
+import { dataTestIds } from '../../utils';
+import { pad } from '../../helpers';
 
 const OrderCard = (orderProps) => {
   const {
     id, totalPrice,
     deliveryAddress,
     deliveryNumber,
-    saleDate, status } = orderProps;
+    saleDate, status, testIds } = orderProps;
+
+  const navigate = useNavigate();
 
   const formattedPrice = `R$ ${String(totalPrice.toFixed(2)).replace('.', ',')}`;
   const formattedAddress = `${deliveryAddress}, ${deliveryNumber}`;
 
+  const handleClick = () => navigate(`/customer/orders/${id}`);
+
   return (
-    <section className="order-card-container">
-      <div data-testid={ dataTestIds['48'] } className="order-id">
+    <button className="order-card-container" type="button" onClick={ handleClick }>
+      <div data-testid={ `${dataTestIds[testIds[0]]}${id}` } className="order-id">
         <p>Pedido</p>
         <p>{ pad(id) }</p>
       </div>
       <section className="order-middle-container">
         <div className="order-middle-top">
-          <OrderStatus status={ status } />
+          <OrderStatus status={ status } testId={ `${dataTestIds[testIds[1]]}${id}` } />
           <div className="order-date-total-price">
-            <p data-testid={ dataTestIds['50'] }>{ saleDate }</p>
-            <p data-testid={ dataTestIds['51'] }>{ formattedPrice }</p>
+            <p data-testid={ `${dataTestIds[testIds[2]]}${id}` }>{ saleDate }</p>
+            <p data-testid={ `${dataTestIds[testIds[3]]}${id}` }>{ formattedPrice }</p>
           </div>
         </div>
         {
@@ -39,11 +44,11 @@ const OrderCard = (orderProps) => {
           )
         }
       </section>
-    </section>
+    </button>
   );
 };
 
-const { string, number, exact } = PropTypes;
+const { string, number, arrayOf, exact } = PropTypes;
 
 OrderCard.defaultProps = {
   deliveryAddress: '',
@@ -57,6 +62,7 @@ OrderCard.propTypes = exact({
   deliveryNumber: string,
   saleDate: string.isRequired,
   status: string.isRequired,
+  testIds: arrayOf([string.isRequired]).isRequired,
 }).isRequired;
 
 export default OrderCard;

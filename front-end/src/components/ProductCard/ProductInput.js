@@ -1,41 +1,82 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const ProductInput = ({ name, index }) => {
-  const [qtd, setQtd] = useState(0);
+import {
+  addProductOnOrder,
+  removeProductFromOrder,
+  updateOrderProducts } from '../../redux/reducer/customerSlice';
 
-  const increaseQtd = () => {
-    setQtd((prevQtd) => prevQtd + 1);
-  };
+import { dataTestIds } from '../../utils';
 
-  const decreaseQtd = () => {
-    setQtd((prevQtd) => {
-      if (prevQtd !== 0) return prevQtd - 1;
-      return 0;
+const ProductInput = ({ id, name, price }) => {
+  const [quantity, setQuantity] = useState(0);
+  const dispatch = useDispatch();
+
+  const handleChange = ({ target }) => {
+    const value = Number(target.value);
+    setQuantity((prevQtd) => {
+      if (value <= 0) {
+        dispatch(removeProductFromOrder(name));
+        return 0;
+      }
+      if (prevQtd === 0) {
+        dispatch(addProductOnOrder({ name, price, quantity: value }));
+      }
+      dispatch(updateOrderProducts({ name, quantity: value }));
+      return value;
     });
   };
 
-  const renderButton = (callback, sign, addOrRm) => (
-    <button
-      data-testid={ `customer_products__button-card-${addOrRm}-item-${index}` }
-      type="button"
-      onClick={ callback }
-    >
-      { sign }
-    </button>
-  );
+  const increaseQtd = () => {
+    setQuantity((prevQtd) => {
+      if (prevQtd === 0) {
+        dispatch(addProductOnOrder({ name, price, quantity: 1 }));
+        return 1;
+      }
+      dispatch(updateOrderProducts({ name, quantity: prevQtd + 1 }));
+      return prevQtd + 1;
+    });
+  };
+
+  const decreaseQtd = () => {
+    setQuantity((prevQtd) => {
+      if (prevQtd === 0) return 0;
+      if (prevQtd === 1) {
+        dispatch(removeProductFromOrder(name));
+        return 0;
+      }
+      dispatch(updateOrderProducts({ name, quantity: prevQtd - 1 }));
+      return prevQtd - 1;
+    });
+  };
 
   return (
     <section className="product-card-input-container">
-      <p data-testid={ `customer_products__element-card-title-${index}` }>
+      <p data-testid={ `${dataTestIds['15']}${id}` }>
         { name }
       </p>
       <section className="product-card-input">
-        { renderButton(decreaseQtd, '-', 'rm') }
-        <span data-testid={ `customer_products__input-card-quantity-${index}` }>
-          { qtd }
-        </span>
-        { renderButton(increaseQtd, '+', 'add') }
+        <button
+          data-testid={ `${dataTestIds['19']}${id}` }
+          type="button"
+          onClick={ decreaseQtd }
+        >
+          -
+        </button>
+        <input
+          type="number"
+          value={ quantity }
+          onChange={ handleChange }
+          data-testid={ `${dataTestIds['20']}${id}` }
+        />
+        <button
+          data-testid={ `${dataTestIds['18']}${id}` }
+          type="button"
+          onClick={ increaseQtd }
+        >
+          +
+        </button>
       </section>
     </section>
   );
@@ -44,8 +85,9 @@ const ProductInput = ({ name, index }) => {
 const { string, number } = PropTypes;
 
 ProductInput.propTypes = {
+  id: number.isRequired,
   name: string.isRequired,
-  index: number.isRequired,
+  price: string.isRequired,
 };
 
 export default ProductInput;

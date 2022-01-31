@@ -2,25 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ProductInput from './ProductInput';
+import './style.css';
 
-import './ProductCard.css';
+import { dataTestIds } from '../../utils';
 
-const ProductCard = ({ name, price, urlImage, index }) => {
-  const formattedPrice = `R$ ${String(price.toFixed(2)).replace('.', ',')}`;
+const ProductCard = ({ id, name, price, urlImage }) => {
+  const formattedPrice = `R$ ${price}`;
 
   return (
     <section className="product-card-container">
       <span
-        data-testid={ `customer_products__element-card-price-${index}` }
+        data-testid={ `${dataTestIds['16']}${id}` }
       >
         { formattedPrice }
       </span>
       <img
-        data-testid={ `customer_products__img-card-bg-image-${index}` }
+        data-testid={ `${dataTestIds['17']}${id}` }
         src={ urlImage }
         alt={ name }
       />
-      <ProductInput name={ name } index={ index } />
+      <ProductInput id={ id } name={ name } price={ price } />
     </section>
   );
 };
@@ -28,10 +29,10 @@ const ProductCard = ({ name, price, urlImage, index }) => {
 const { string, number } = PropTypes;
 
 ProductCard.propTypes = {
+  id: number.isRequired,
   name: string.isRequired,
-  price: number.isRequired,
+  price: string.isRequired,
   urlImage: string.isRequired,
-  index: number.isRequired,
 };
 
 export default ProductCard;

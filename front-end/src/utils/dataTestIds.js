@@ -1,4 +1,4 @@
-const dataTestIds = {
+export default {
   1: 'common_login__input-email',
   2: 'common_login__input-password',
   3: 'common_login__button-login',
@@ -72,5 +72,3 @@ const dataTestIds = {
   78: 'admin_manage__input-password',
   79: 'customer_products__button-cart',
 };
-
-export default dataTestIds;

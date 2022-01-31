@@ -2,12 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
-import dataTestIds from '../../data/dataTestIds';
+import { dataTestIds } from '../../utils';
 
 const Button = ({ text, route, testId, disabled }) => {
   const navigate = useNavigate();
 
   const handleRedirect = (link) => {
+    if (text === 'Sair') {
+      localStorage.removeItem('user');
+    }
+
     navigate(link);
   };
 

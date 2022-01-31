@@ -30,13 +30,14 @@ const Button = ({ text, route, testId, disabled }) => {
 const { string, bool } = PropTypes;
 
 Button.defaultProps = {
+  testId: '',
   disabled: false,
 };
 
 Button.propTypes = {
   text: string.isRequired,
   route: string.isRequired,
-  testId: string.isRequired,
+  testId: string,
   disabled: bool,
 };
 

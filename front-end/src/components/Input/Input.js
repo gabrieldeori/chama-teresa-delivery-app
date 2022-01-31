@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import dataTestIds from '../../data/dataTestIds';
+import { dataTestIds } from '../../utils';
 
 const Input = (props) => {
   const { label, type, testId, value, placeholder, callback } = props;

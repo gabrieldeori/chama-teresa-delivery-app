@@ -1,3 +1,7 @@
 import CustomerProducts from './CustomerProducts';
+import CustomerCheckout from './CustomerCheckout';
 
-export default CustomerProducts;
+export {
+  CustomerProducts,
+  CustomerCheckout,
+};

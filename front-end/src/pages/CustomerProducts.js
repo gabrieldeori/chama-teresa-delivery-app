@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { Navbar, ProductCard, Button } from '../components';
 
-import getProducts from '../services';
+import { getProducts } from '../services';
 import { dataTestIds, navPages } from '../utils';
 import { calculateOrderTotalPrice } from '../helpers';
 

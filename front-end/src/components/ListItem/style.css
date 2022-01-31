@@ -1,0 +1,43 @@
+.list-item-container {
+  background-color: rgba(234, 241, 239, 1);
+  border-radius: 10px;
+  display: flex;
+  width: fit-content;
+}
+
+.list-item-container > * {
+  color: rgba(242, 255, 252, 1);
+  padding: 5px;
+}
+
+.list-item-container *:nth-child( 1 ) {
+  background-color: rgba(47, 193, 140, 1);
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  color: rgba(0, 24, 19, 1);
+}
+
+.list-item-container *:nth-child( 2 ) {
+  color: rgba(0, 24, 19, 1);
+}
+
+.list-item-container *:nth-child( 3 ) {
+  background-color: rgba(3, 107, 82, 1);
+}
+
+.list-item-container *:nth-child( 4 ) {
+  background-color: rgba(66, 25, 129, 1);
+}
+
+.list-item-container *:nth-child( 5 ) {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.list-item-container .item-exclude-btn {
+  background-color: rgba(5, 108, 249, 1);
+}
+
+.list-item-container .item-remove-btn {
+  background-color: rgba(47, 193, 140, 1);
+}

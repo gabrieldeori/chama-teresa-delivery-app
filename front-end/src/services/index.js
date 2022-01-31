@@ -1,3 +1,9 @@
 import getProducts from './getProducts';
+import getSellers from './getSellers';
+import postSale from './postSale';
 
-export default getProducts;
+export {
+  getProducts,
+  getSellers,
+  postSale,
+};

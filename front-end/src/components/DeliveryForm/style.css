@@ -1,0 +1,22 @@
+.delivery-form-container {
+  display: flex;
+}
+
+.delivery-form-container label {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+.delivery-form-container input, select {
+  border: 1px solid rgba(0, 24, 19, 1);
+  border-radius: 5px;
+  margin-top: 5px;
+  padding: 5px;
+}
+
+.delivery-form-container button {
+  background-color: rgba(3, 107, 82, 1);
+  border-radius: 5px;
+  padding: 5px;
+}

@@ -298,4 +298,5 @@ back-end/.env
 **/coverage
 **/.nyc_output
 
+# Main-group-4 adiciona package-lock.json para evitar conflitos do arquivo
 package-lock.json

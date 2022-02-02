@@ -40,8 +40,9 @@ const DeliveryForm = () => {
       deliveryAddress,
       deliveryNumber,
       status: 'Pendente',
+      products: orderProducts.map(({ id, quantity }) => ({ id, quantity })),
     };
-    console.log(body);
+
     const saleId = await postSale(body);
 
     clearForm();

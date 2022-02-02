@@ -5,15 +5,11 @@ import { removeProductFromOrder } from '../redux/reducer/customerSlice';
 import { Navbar, ListItem, DeliveryForm, Button } from '../components';
 
 import { dataTestIds, navPages } from '../utils';
-import { calculateOrderTotalPrice } from '../helpers';
+import { formatTotalPrice } from '../helpers';
 
 const CustomerCheckout = () => {
   const orderProducts = useSelector((state) => state.customer.orderProducts);
   const dispatch = useDispatch();
-
-  const formatTotalPrice = () => (
-    `Ver carrinho: R$ ${calculateOrderTotalPrice(orderProducts).toFixed(2)}`
-  );
 
   return (
     <>
@@ -49,11 +45,11 @@ const CustomerCheckout = () => {
           }
 
           <Button
-            text={ formatTotalPrice() }
+            text={ formatTotalPrice(orderProducts) }
             route="/customer/checkout"
           />
           <p hidden data-testid={ dataTestIds['28'] }>
-            { calculateOrderTotalPrice(orderProducts) }
+            { formatTotalPrice(orderProducts) }
           </p>
         </section>
         <section>

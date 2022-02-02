@@ -5,7 +5,7 @@ import { Navbar, ProductCard, Button } from '../components';
 
 import { getProducts } from '../services';
 import { dataTestIds, navPages } from '../utils';
-import { calculateOrderTotalPrice } from '../helpers';
+import { formatTotalPrice } from '../helpers';
 
 const CustomerProducts = () => {
   const [products, setProducts] = useState([]);
@@ -13,10 +13,6 @@ const CustomerProducts = () => {
   const orderProducts = useSelector((state) => state.customer.orderProducts);
 
   useEffect(() => getProducts(setProducts), []);
-
-  const formatTotalPrice = () => (
-    `Ver carrinho: R$ ${calculateOrderTotalPrice(orderProducts).toFixed(2)}`
-  );
 
   return (
     <>
@@ -31,12 +27,12 @@ const CustomerProducts = () => {
         }
 
         <Button
-          text={ formatTotalPrice() }
+          text={ formatTotalPrice(orderProducts, 'Ver carrinho') }
           route="/customer/checkout"
           testId={ dataTestIds['79'] }
         />
         <p hidden data-testid={ dataTestIds['21'] }>
-          { calculateOrderTotalPrice(orderProducts) }
+          { formatTotalPrice(orderProducts, 'Ver carrinho') }
         </p>
       </main>
     </>

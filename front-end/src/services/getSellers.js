@@ -1,13 +1,19 @@
 import axios from 'axios';
 
-const GET_SELLERS_URL = 'http://localhost:3001/users/role=seller';
-const headers = {
-  headers: {
-    Authorization: JSON.parse(localStorage.getItem('user')).token,
-  },
-};
-
 export default async (callback) => {
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  if (!user) {
+    return axios.get('http://localhost:3001/');
+  }
+
+  const GET_SELLERS_URL = 'http://localhost:3001/users/seller';
+  const headers = {
+    headers: {
+      Authorization: user.token,
+    },
+  };
+
   try {
     const { data: { data } } = await axios.get(GET_SELLERS_URL, headers);
     if (data) {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { redirectToPath } from '../helpers';
 import dataTestIds from '../utils/dataTestIds';
 import Button from '../components/Button';
 // import postLogin from '../services/postLogin';
@@ -20,6 +21,13 @@ function Login() {
   const [disable, setDisable] = useState(true);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) {
+      redirectToPath(navigate, user.role);
+    }
+  }, []);
 
   useEffect(() => {
     const handleValidation = () => {
@@ -50,7 +58,7 @@ function Login() {
       setHidden(false);
     } else {
       localStorage.setItem('user', JSON.stringify(data));
-      navigate('/customer/products');
+      redirectToPath(navigate, data.role);
     }
   };
 

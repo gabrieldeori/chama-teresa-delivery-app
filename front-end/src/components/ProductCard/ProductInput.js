@@ -21,9 +21,9 @@ const ProductInput = ({ id, name, price }) => {
         return 0;
       }
       if (prevQtd === 0) {
-        dispatch(addProductOnOrder({ name, price, quantity: value }));
+        dispatch(addProductOnOrder({ id, name, price, quantity: value }));
       }
-      dispatch(updateOrderProducts({ name, quantity: value }));
+      dispatch(updateOrderProducts({ id, name, quantity: value }));
       return value;
     });
   };
@@ -31,10 +31,10 @@ const ProductInput = ({ id, name, price }) => {
   const increaseQtd = () => {
     setQuantity((prevQtd) => {
       if (prevQtd === 0) {
-        dispatch(addProductOnOrder({ name, price, quantity: 1 }));
+        dispatch(addProductOnOrder({ id, name, price, quantity: 1 }));
         return 1;
       }
-      dispatch(updateOrderProducts({ name, quantity: prevQtd + 1 }));
+      dispatch(updateOrderProducts({ id, name, quantity: prevQtd + 1 }));
       return prevQtd + 1;
     });
   };
@@ -46,7 +46,7 @@ const ProductInput = ({ id, name, price }) => {
         dispatch(removeProductFromOrder(name));
         return 0;
       }
-      dispatch(updateOrderProducts({ name, quantity: prevQtd - 1 }));
+      dispatch(updateOrderProducts({ id, name, quantity: prevQtd - 1 }));
       return prevQtd - 1;
     });
   };

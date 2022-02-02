@@ -8,7 +8,7 @@ const router = Router();
 router.post(
   '/',
   middlewares.validate.register,
-  controllers.user.register,
+  controllers.users.register,
   middlewares.error,
   );
 

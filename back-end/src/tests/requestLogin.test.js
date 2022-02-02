@@ -17,7 +17,7 @@ let insertedUser;
 const newUser = {
   name: 'Nome Válido Teste',
   email: 'valid@mail.ok',
-  password: 'e10adc3949ba59abbe56e057f20f883e',
+  password: '123456',
   role: 'customer',
 };
 
@@ -138,18 +138,13 @@ describe('> Email sem "."', () => {
 describe('> Email e senha válidos mas email não existente.', () => {
   before( async () => {
     try {
-      insertedUser = await models.User.create(newUser);
       request = await chai.request(app)
         .post('/login')
-        .send({ email: 'nonexistent@email.com', password: '123456' });
+        .send({ email: 'fail@mail.com', password: '123456' });
     } catch (e) {
       console.log(e);
     }
   });
-
-  after(async () => {
-    await insertedUser.destroy();
-  })
 
   it('Deve retornar status 404 de "NOT FOUND"', async () => {
     expect(request.status).to.be.equals(status.NOT_FOUND);
@@ -167,6 +162,7 @@ describe('> Email e senha válidos mas senha incorreta.', () => {
   before( async () => {
     try {
       insertedUser = await models.User.create(newUser);
+      console.log(insertedUser);
       request = await chai.request(app)
         .post('/login')
         .send({ email: 'valid@mail.ok', password: 'erreiasenha' });

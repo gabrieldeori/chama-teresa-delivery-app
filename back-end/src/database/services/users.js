@@ -2,12 +2,13 @@ const md5 = require('md5');
 const models = require('../models');
 const utils = require('../utils');
 
-async function create({ name, email, password }) {
+async function create({ name, email, password, role }) {
   const userExists = await models.User.findOne({ where: { email } });
   if (userExists) return utils.errors.userExists;
-  const role = utils.roles.customer;
+  const namedRole = utils.roles[role].name;
+  console.log(namedRole);
 
-  const newUser = { name, email, password: md5(password), role };
+  const newUser = { name, email, password: md5(password), role: namedRole };
   const { id } = await models.User.create(newUser);
   if (!id) return utils.errors.dbError;
   const dataToToken = { email, name, role };
@@ -30,7 +31,39 @@ async function login({ email, password }) {
   return { sendToFrontEnd, statusCode: utils.status.OK };
 }
 
+async function getAllUsers({ role }) {
+  const users = await models.User.findAll({
+    where: { role },
+    attributes: {exclude: ['password']},
+})
+  if (!users || users.length <= 0) return utils.errors.userNonexistent;
+  const data = users;
+  const sendToFrontEnd = {
+    success: true,
+    message: 'Usuários encontrados',
+    data
+  };
+  return { sendToFrontEnd, statusCode: utils.status.OK };
+ }
+
+ async function getById({ id }) { // /sellers/:id
+  const user = await models.User.findOne({
+    where: { id },
+    attributes: {exclude: ['password']},
+})
+  if (!user || user.role !== 'seller') return utils.errors.notSeller;
+  const data = user;
+  const sendToFrontEnd = {
+    success: true,
+    message: 'Usuário Seller encontrado',
+    data
+  };
+  return { sendToFrontEnd, statusCode: utils.status.OK };
+ }
+
 module.exports = {
   create,
   login,
+  getAllUsers,
+  getById,
 };

@@ -297,3 +297,5 @@ back-end/.env
 **/reports/**/*
 **/coverage
 **/.nyc_output
+
+package-lock.json

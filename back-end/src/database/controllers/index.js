@@ -1,9 +1,15 @@
+const images = require('./images');
+const orders = require('./orders');
 const ping = require('./ping');
 const products = require('./products');
-const user = require('./user');
+const redirect = require('./redirect');
+const users = require('./users');
 
 module.exports = {
+  images,
+  orders,
   ping,
   products,
-  user,
+  redirect,
+  users,
 };

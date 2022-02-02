@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: DataTypes.STRING(100),
     price: DataTypes.DECIMAL(4, 2),
-    url_image: DataTypes.STRING(200),
+    urlImage: DataTypes.STRING(200),
   },
   {
     tableName: 'products',

@@ -37,12 +37,20 @@ const errors = {
     error: { success: false, message: 'Token inválido ou expirado', data: null },
     statusCode: status.UNAUTHORIZED,
   },
+  ordersNonexistent: {
+    error: { success: false, message: 'Pedidos dessa natureza não existem', data: null },
+    statusCode: status.NOT_FOUND,
+  },
   userExists: {
     error: { success: false, message: 'Usuário já existe', data: null },
     statusCode: status.CONFLICT,
   },
   userNonexistent: {
     error: { success: false, message: 'Usuário não existe', data: null },
+    statusCode: status.NOT_FOUND,
+  },
+  notSeller: {
+    error: { success: false, message: 'Não é vendedor ou não existe', data: null },
     statusCode: status.NOT_FOUND,
   },
 };

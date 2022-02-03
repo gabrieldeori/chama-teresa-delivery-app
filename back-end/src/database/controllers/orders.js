@@ -27,7 +27,7 @@ async function getById(req, res, nex) {
 }
 
 async function getByUserId(req, res, nex) {
-  const { email } = req.body;
+  const { email } = req.user;
   const { id } = await models.User.findOne({ where: { email } });
   const { dataValues: { role } } = await models.User.findOne({ where: { id } });
   const response = await services.orders.getByUserId({ role, id });

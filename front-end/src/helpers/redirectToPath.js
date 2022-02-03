@@ -4,7 +4,7 @@ export default (callback, role) => {
     callback('/customer/products');
     break;
   case 'seller':
-    callback('/customer/orders');
+    callback('/seller/orders');
     break;
   case 'admin':
     callback('/admin');

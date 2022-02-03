@@ -19,8 +19,8 @@ function create(data) {
 function verify(token) {
   if (!token) return errors.tokenNotFound;
   try {
-    jwt.verify(token, secret);
-    return { ok: true };
+    const decoded = jwt.verify(token, secret);
+    return { ok: true, ...decoded.data };
   } catch (_e) {
     return errors.tokenInvalidOrExpired;
   }

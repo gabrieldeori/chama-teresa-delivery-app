@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { redirectToPath } from '../helpers';
-import dataTestIds from '../utils/dataTestIds';
+import { dataTestIds } from '../utils';
 import Button from '../components/Button';
-// import postLogin from '../services/postLogin';
 
 const NOT_FOUND = 404;
 const POST_LOGIN_URL = 'http://localhost:3001/login';
@@ -53,7 +52,7 @@ function Login() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(loginForm),
     });
-    const data = await dataFetch.json();
+    const { data } = await dataFetch.json();
     if (dataFetch.status === NOT_FOUND) {
       setHidden(false);
     } else {
@@ -92,7 +91,7 @@ function Login() {
         <Button
           text="Ainda não tenho conta"
           route="/register"
-          testId={ dataTestIds['4'] }
+          testId="4"
         />
       </form>
       <p

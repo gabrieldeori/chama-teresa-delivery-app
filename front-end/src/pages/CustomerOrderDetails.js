@@ -8,7 +8,13 @@ import { dataTestIds, navPages } from '../utils';
 import { formatTotalPrice } from '../helpers';
 
 const CustomerOrderDetails = () => {
-  const [orderDetails, setOrderDetails] = useState({});
+  const [orderDetails, setOrderDetails] = useState({
+    id: '',
+    saleDate: '',
+    status: '',
+    sellerName: '',
+    products: [],
+  });
   const { id: paramsId } = useParams();
 
   useEffect(() => getOrderById(setOrderDetails, paramsId), [paramsId]);
@@ -58,7 +64,8 @@ const CustomerOrderDetails = () => {
           }
 
           <p data-testid={ dataTestIds['46'] }>
-            { formatTotalPrice(orderDetails.products) }
+            { formatTotalPrice(orderDetails.products
+              .map(({ SalesProducts: { quantity }, price }) => ({ quantity, price }))) }
           </p>
         </section>
       </main>

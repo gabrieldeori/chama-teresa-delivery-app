@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const controllers = require('../database/controllers');
 const router = require('./routers');
 
 const pathToPublicFolder = ('../../public');
@@ -15,7 +14,6 @@ app.use(crossOriginResourceSharing);
 app.use(bodyParseJson);
 app.use(express.static(pathToPublicFolder));
 
-app.get('/', controllers.redirect.login);
 app.use('/ping', router.ping);
 app.use('/login', router.login);
 app.use('/register', router.register);

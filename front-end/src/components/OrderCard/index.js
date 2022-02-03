@@ -17,7 +17,7 @@ const OrderCard = (orderProps) => {
 
   const navigate = useNavigate();
 
-  const formattedPrice = `R$ ${String(totalPrice.toFixed(2)).replace('.', ',')}`;
+  const formattedPrice = `R$ ${totalPrice.replace('.', ',')}`;
   const formattedAddress = `${deliveryAddress}, ${deliveryNumber}`;
 
   const handleClick = () => navigate(`/customer/orders/${id}`);

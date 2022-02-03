@@ -3,10 +3,6 @@ import axios from 'axios';
 export default async (body) => {
   const user = JSON.parse(localStorage.getItem('user'));
 
-  if (!user) {
-    return axios.get('http://localhost:3001/');
-  }
-
   const POST_SALE_URL = 'http://localhost:3001/orders';
   const headers = {
     headers: {
@@ -15,7 +11,7 @@ export default async (body) => {
   };
 
   try {
-    const { data: { data: { id } } } = await axios.get(POST_SALE_URL, body, headers);
+    const { data: { data: { id } } } = await axios.post(POST_SALE_URL, body, headers);
     if (id) {
       return id;
     }

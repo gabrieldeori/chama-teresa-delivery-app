@@ -3,10 +3,6 @@ import axios from 'axios';
 export default async (callback) => {
   const user = JSON.parse(localStorage.getItem('user'));
 
-  if (!user) {
-    return axios.get('http://localhost:3001/');
-  }
-
   const GET_PRODUCTS_URL = 'http://localhost:3001/products';
   const headers = {
     headers: {

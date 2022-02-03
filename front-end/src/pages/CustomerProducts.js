@@ -5,7 +5,7 @@ import { Navbar, ProductCard, Button } from '../components';
 
 import { getProducts } from '../services';
 import { dataTestIds, navPages } from '../utils';
-import { formatTotalPrice } from '../helpers';
+import { calculateOrderTotalPrice, formatNumber } from '../helpers';
 
 const CustomerProducts = () => {
   const [products, setProducts] = useState([]);
@@ -19,7 +19,7 @@ const CustomerProducts = () => {
       <header>
         <Navbar navPages={ navPages['/customer'] } />
       </header>
-      <main>
+      <main className="main-customer-products-page">
         {
           products.map((product) => (
             <ProductCard key={ product.id } { ...product } />
@@ -27,12 +27,13 @@ const CustomerProducts = () => {
         }
 
         <Button
-          text={ formatTotalPrice(orderProducts, 'Ver carrinho') }
+          text={ formatNumber(calculateOrderTotalPrice(orderProducts)) }
           route="/customer/checkout"
-          testId={ dataTestIds['79'] }
+          testId="79"
+          disabled={ !orderProducts.length }
         />
-        <p hidden data-testid={ dataTestIds['21'] }>
-          { formatTotalPrice(orderProducts, 'Ver carrinho') }
+        <p data-testid={ dataTestIds['21'] }>
+          { formatNumber(calculateOrderTotalPrice(orderProducts)) }
         </p>
       </main>
     </>

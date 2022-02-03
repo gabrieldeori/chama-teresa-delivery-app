@@ -1,11 +1,13 @@
 import pad from './pad';
 import calculateOrderTotalPrice from './calculateOrderTotalPrice';
 import redirectToPath from './redirectToPath';
-import formatTotalPrice from './formatTotalPrice';
+import formatNumber from './formatNumber';
+import formatDate from './formatDate';
 
 export {
   pad,
   calculateOrderTotalPrice,
   redirectToPath,
-  formatTotalPrice,
+  formatDate,
+  formatNumber,
 };

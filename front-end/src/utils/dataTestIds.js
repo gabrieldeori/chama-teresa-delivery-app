@@ -34,6 +34,7 @@ export default {
   33: 'customer_orders__element-order-id-',
   34: 'customer_orders__element-delivery-status-',
   35: 'customer_orders__element-order-date-',
+  36: 'customer_orders__element-card-price-',
   37: 'customer_order_details__element-order-details-label-order-id',
   38: 'customer_order_details__element-order-details-label-seller-name',
   39: 'customer_order_details__element-order-details-label-order-date',

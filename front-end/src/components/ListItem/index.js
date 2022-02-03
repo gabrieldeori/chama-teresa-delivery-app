@@ -26,7 +26,7 @@ const ListItem = (props) => {
             className={ (btn === 'Excluir') ? 'item-exclude-btn' : 'item-remove-btn' }
             type="button"
             onClick={ () => callback(name) }
-            data-testid={ dataTestIds[testIds[4]] }
+            data-testid={ `${dataTestIds[testIds[5]]}${index}` }
           >
             { btn }
           </button>

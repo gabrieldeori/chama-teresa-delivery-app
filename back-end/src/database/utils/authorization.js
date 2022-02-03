@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const errors = require('./errors');
 
 const pathToKey = './jwt.evaluation.key';
-const secret = fs.readFileSync(pathToKey, 'utf-8');
+const secret = fs.readFileSync(pathToKey, 'utf-8').trim();
 
 const config = {
   expiresIn: '15d',

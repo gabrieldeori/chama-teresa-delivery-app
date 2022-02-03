@@ -30,7 +30,7 @@ const Navbar = ({ navPages }) => {
         <NavButton
           text="Sair"
           route="/"
-          testId={ dataTestIds['14'] }
+          testId="14"
         />
       </section>
     </nav>

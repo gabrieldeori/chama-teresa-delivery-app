@@ -82,7 +82,7 @@ const DeliveryForm = () => {
           name="number"
           type="number"
           value={ deliveryNumber }
-          onChange={ ({ target: { value } }) => setDeliveryNumber(value) }
+          onChange={ ({ target: { value } }) => setDeliveryNumber(Number(value)) }
           data-testid={ dataTestIds['31'] }
         />
       </label>

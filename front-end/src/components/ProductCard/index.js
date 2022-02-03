@@ -7,7 +7,7 @@ import './style.css';
 import { dataTestIds } from '../../utils';
 
 const ProductCard = ({ id, name, price, urlImage }) => {
-  const formattedPrice = `R$ ${price}`;
+  const formattedPrice = `${price.replace('.', ',')}`;
 
   return (
     <section className="product-card-container">

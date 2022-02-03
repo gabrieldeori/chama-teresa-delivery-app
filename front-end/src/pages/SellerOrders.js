@@ -18,7 +18,12 @@ const SellerOrders = () => {
       <main>
         {
           orders.map((order) => (
-            <OrderCard key={ order.id } { ...order } testIds={ ['48', '49', '50', '51', '52'] } />
+            <OrderCard
+              key={ order.id }
+              { ...order }
+              testIds={ ['48', '49', '50', '51', '52'] }
+              userRole="seller"
+            />
           ))
         }
       </main>

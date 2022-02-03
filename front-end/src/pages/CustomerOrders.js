@@ -18,7 +18,12 @@ const CustomerOrders = () => {
       <main>
         {
           orders.map((order) => (
-            <OrderCard key={ order.id } { ...order } testIds={ ['33', '34', '35', ''] } />
+            <OrderCard
+              key={ order.id }
+              { ...order }
+              testIds={ ['33', '34', '35', '36'] }
+              userRole="customer"
+            />
           ))
         }
       </main>

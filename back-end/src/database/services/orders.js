@@ -38,7 +38,7 @@ async function create(datas) {
       message: 'Venda criada com sucesso',
       data
     };
-    return { sendToFrontEnd, statusCode: utils.status.OK };
+    return { sendToFrontEnd, statusCode: utils.status.CREATED };
   } catch (e) {
     console.log(e);
     return internalServerError;

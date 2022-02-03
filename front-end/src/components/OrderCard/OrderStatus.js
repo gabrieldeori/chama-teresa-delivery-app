@@ -8,15 +8,13 @@ const OrderStatus = ({ status, testId }) => {
     entregue: 'rgba(0, 204, 155, 0.75)',
   };
 
-  const formattedStatus = status.toUpperCase();
-
   return (
     <div
       className="delivery-status"
       style={ { backgroundColor: style[status.toLowerCase()] } }
       data-testid={ testId }
     >
-      { formattedStatus }
+      { status }
     </div>
   );
 };

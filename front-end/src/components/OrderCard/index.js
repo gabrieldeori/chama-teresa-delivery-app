@@ -6,21 +6,21 @@ import OrderStatus from './OrderStatus';
 import './style.css';
 
 import { dataTestIds } from '../../utils';
-import { pad } from '../../helpers';
+import { pad, formatDate } from '../../helpers';
 
 const OrderCard = (orderProps) => {
   const {
     id, totalPrice,
     deliveryAddress,
     deliveryNumber,
-    saleDate, status, testIds } = orderProps;
+    saleDate, status, testIds, userRole } = orderProps;
 
   const navigate = useNavigate();
 
   const formattedPrice = `R$ ${totalPrice.replace('.', ',')}`;
   const formattedAddress = `${deliveryAddress}, ${deliveryNumber}`;
 
-  const handleClick = () => navigate(`/customer/orders/${id}`);
+  const handleClick = () => navigate(`/${userRole}/orders/${id}`);
 
   return (
     <button className="order-card-container" type="button" onClick={ handleClick }>
@@ -32,7 +32,7 @@ const OrderCard = (orderProps) => {
         <div className="order-middle-top">
           <OrderStatus status={ status } testId={ `${dataTestIds[testIds[1]]}${id}` } />
           <div className="order-date-total-price">
-            <p data-testid={ `${dataTestIds[testIds[2]]}${id}` }>{ saleDate }</p>
+            <p data-testid={ `${dataTestIds[testIds[2]]}${id}` }>{ formatDate(saleDate) }</p>
             <p data-testid={ `${dataTestIds[testIds[3]]}${id}` }>{ formattedPrice }</p>
           </div>
         </div>
@@ -63,6 +63,7 @@ OrderCard.propTypes = exact({
   saleDate: string.isRequired,
   status: string.isRequired,
   testIds: arrayOf([string.isRequired]).isRequired,
+  userRole: string.isRequired,
 }).isRequired;
 
 export default OrderCard;

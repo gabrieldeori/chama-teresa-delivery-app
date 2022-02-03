@@ -2,10 +2,10 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { removeProductFromOrder } from '../redux/reducer/customerSlice';
-import { Navbar, ListItem, DeliveryForm, Button } from '../components';
+import { Navbar, ListItem, DeliveryForm } from '../components';
 
 import { dataTestIds, navPages } from '../utils';
-import { formatTotalPrice } from '../helpers';
+import { calculateOrderTotalPrice, formatNumber } from '../helpers';
 
 const CustomerCheckout = () => {
   const orderProducts = useSelector((state) => state.customer.orderProducts);
@@ -37,19 +37,15 @@ const CustomerCheckout = () => {
                 testIds={ ['22', '23', '24', '25', '26', '27'] }
                 callback={ (name) => dispatch(removeProductFromOrder(name)) }
                 info1={ product.quantity }
-                info2={ product.price }
-                info3={ `${(product.quantity * product.price).toFixed(2)}` }
+                info2={ formatNumber(product.price) }
+                info3={ formatNumber(product.quantity * product.price) }
                 btn="Remover"
               />
             ))
           }
 
-          <Button
-            text={ formatTotalPrice(orderProducts) }
-            route="/customer/checkout"
-          />
-          <p hidden data-testid={ dataTestIds['28'] }>
-            { formatTotalPrice(orderProducts) }
+          <p data-testid={ dataTestIds['28'] }>
+            { formatNumber(calculateOrderTotalPrice(orderProducts)) }
           </p>
         </section>
         <section>

@@ -12,6 +12,7 @@ const AppRoutes = () => (
     <Route path="/customer/orders/:id" element={ <Pages.CustomerOrderDetails /> } />
     <Route path="/seller/orders" element={ <Pages.SellerOrders /> } />
     <Route path="/seller/orders/:id" element={ <Pages.SellerOrderDetails /> } />
+    <Route path="/admin/manage" element={ <Pages.AdminManage /> } />
     <Route path="/register" element={ <Pages.Register /> } />
   </Routes>
 );

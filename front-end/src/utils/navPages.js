@@ -18,7 +18,7 @@ const seller = {
 
 const admin = {
   text: 'Gerenciar Usuários',
-  route: '/admin',
+  route: '/admin/manage',
   testId: '12',
 };
 

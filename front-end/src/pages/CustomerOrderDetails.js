@@ -58,7 +58,7 @@ const CustomerOrderDetails = () => {
               <ListItem
                 key={ product.id }
                 index={ index }
-                productNumber={ index + 1 }
+                itemNumber={ index + 1 }
                 name={ product.name }
                 testIds={ ['41', '42', '43', '44', '45'] }
                 info1={ product.SalesProducts.quantity }

@@ -7,12 +7,12 @@ import { dataTestIds } from '../../utils';
 import { formatNumber } from '../../helpers';
 
 const ListItem = (props) => {
-  const { index, productNumber, name, testIds,
+  const { index, itemNumber, name, testIds,
     callback, info1, info2, info3, btn } = props;
 
   return (
     <section className="list-item-container">
-      <span data-testid={ `${dataTestIds[testIds[0]]}${index}` }>{ productNumber }</span>
+      <span data-testid={ `${dataTestIds[testIds[0]]}${index}` }>{ itemNumber }</span>
       <span data-testid={ `${dataTestIds[testIds[1]]}${index}` }>{ name }</span>
       <span data-testid={ `${dataTestIds[testIds[2]]}${index}` }>{ info1 }</span>
       <span
@@ -35,7 +35,11 @@ const ListItem = (props) => {
             className={ (btn === 'Excluir') ? 'item-exclude-btn' : 'item-remove-btn' }
             type="button"
             onClick={ () => callback(name) }
-            data-testid={ `${dataTestIds[testIds[5]]}${index}` }
+            data-testid={
+              dataTestIds[testIds[5]]
+              ? `${dataTestIds[testIds[5]]}${index}`
+              : `${dataTestIds[testIds[4]]}${index}`
+            }
           >
             { btn }
           </button>
@@ -55,7 +59,7 @@ const { string, number, func, arrayOf } = PropTypes;
 
 ListItem.propTypes = {
   index: number.isRequired,
-  productNumber: number.isRequired,
+  itemNumber: number.isRequired,
   name: string.isRequired,
   testIds: arrayOf(string.isRequired).isRequired,
   callback: func,

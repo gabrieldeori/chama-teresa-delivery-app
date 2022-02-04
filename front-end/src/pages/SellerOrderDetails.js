@@ -22,10 +22,6 @@ const SellerOrderDetails = () => {
 
   useEffect(() => getOrderById(setOrderDetails, paramsId), [paramsId]);
 
-  const handlePing = () => {
-    socket.emit('ping', '');
-  };
-
   return (
     <>
       <header>
@@ -61,12 +57,6 @@ const SellerOrderDetails = () => {
             >
               Saiu para entrega
             </button>
-            <button
-              type="button"
-              onClick={ handlePing }
-            >
-              PINGA NI MIM
-            </button>
           </div>
           <div>
             <span>Item</span>
@@ -80,7 +70,7 @@ const SellerOrderDetails = () => {
               <ListItem
                 key={ product.id }
                 index={ index }
-                productNumber={ index + 1 }
+                itemNumber={ index + 1 }
                 name={ product.name }
                 testIds={ ['59', '60', '61', '62', '63'] }
                 info1={ product.SalesProducts.quantity }

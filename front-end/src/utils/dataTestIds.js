@@ -71,6 +71,7 @@ export default {
   72: 'admin_manage__element-user-table-email-',
   73: 'admin_manage__element-user-table-role-',
   74: 'admin_manage__element-user-table-remove-',
+  75: 'admin_manage__element-invalid-register',
   78: 'admin_manage__input-password',
   79: 'customer_products__button-cart',
 };

@@ -32,7 +32,7 @@ const CustomerCheckout = () => {
               <ListItem
                 key={ product.id }
                 index={ index }
-                productNumber={ index + 1 }
+                itemNumber={ index + 1 }
                 name={ product.name }
                 testIds={ ['22', '23', '24', '25', '26', '27'] }
                 callback={ (name) => dispatch(removeProductFromOrder(name)) }

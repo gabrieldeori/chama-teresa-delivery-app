@@ -6,8 +6,8 @@ export default (callback, role) => {
   case 'seller':
     callback('/seller/orders');
     break;
-  case 'admin':
-    callback('/admin');
+  case 'administrator':
+    callback('/admin/manage');
     break;
   default:
     callback('/');

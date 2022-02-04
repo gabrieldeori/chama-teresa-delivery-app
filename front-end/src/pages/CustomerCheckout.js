@@ -37,8 +37,8 @@ const CustomerCheckout = () => {
                 testIds={ ['22', '23', '24', '25', '26', '27'] }
                 callback={ (name) => dispatch(removeProductFromOrder(name)) }
                 info1={ product.quantity }
-                info2={ formatNumber(product.price) }
-                info3={ formatNumber(product.quantity * product.price) }
+                info2={ product.price }
+                info3={ (product.quantity * product.price) }
                 btn="Remover"
               />
             ))

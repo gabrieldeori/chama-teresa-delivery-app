@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import './style.css';
 
 import { dataTestIds } from '../../utils';
+import { formatNumber } from '../../helpers';
 
 const ListItem = (props) => {
   const { index, productNumber, name, testIds,
@@ -14,10 +15,18 @@ const ListItem = (props) => {
       <span data-testid={ `${dataTestIds[testIds[0]]}${index}` }>{ productNumber }</span>
       <span data-testid={ `${dataTestIds[testIds[1]]}${index}` }>{ name }</span>
       <span data-testid={ `${dataTestIds[testIds[2]]}${index}` }>{ info1 }</span>
-      <span data-testid={ `${dataTestIds[testIds[3]]}${index}` }>{ info2 }</span>
+      <span
+        data-testid={ `${dataTestIds[testIds[3]]}${index}` }
+      >
+        { formatNumber(info2) }
+      </span>
       {
         info3 && (
-          <span data-testid={ `${dataTestIds[testIds[4]]}${index}` }>{ info3 }</span>
+          <span
+            data-testid={ `${dataTestIds[testIds[4]]}${index}` }
+          >
+            { formatNumber(info3) }
+          </span>
         )
       }
       {

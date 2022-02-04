@@ -7,42 +7,65 @@ import { getOrderById } from '../services';
 import { dataTestIds, navPages } from '../utils';
 import { calculateOrderTotalPrice, formatNumber, formatDate } from '../helpers';
 
-const CustomerOrderDetails = () => {
+const { io } = require('socket.io-client');
+
+const socket = io('http://localhost:3001');
+
+const SellerOrderDetails = () => {
   const [orderDetails, setOrderDetails] = useState({
     id: '',
     saleDate: '',
     status: '',
-    sellerName: '',
     products: [],
   });
   const { id: paramsId } = useParams();
 
   useEffect(() => getOrderById(setOrderDetails, paramsId), [paramsId]);
 
+  const handlePing = () => {
+    socket.emit('ping', '');
+  };
+
   return (
     <>
       <header>
-        <Navbar navPages={ navPages['/customer'] } />
+        <Navbar navPages={ navPages['/seller'] } />
       </header>
       <main>
         <section>
           <h3>Detalhe do Pedido</h3>
           <div>
-            <span data-testid={ dataTestIds['37'] }>{ orderDetails.id }</span>
-            <span data-testid={ dataTestIds['38'] }>{ orderDetails.sellerName }</span>
+            <span data-testid={ dataTestIds['54'] }>{ orderDetails.id }</span>
             <span
-              data-testid={ dataTestIds['39'] }
+              data-testid={ dataTestIds['56'] }
             >
               { formatDate(orderDetails.saleDate) }
             </span>
-            <span data-testid={ dataTestIds['40'] }>{ orderDetails.status }</span>
+            <span
+              data-testid={ dataTestIds['55'] }
+            >
+              { orderDetails.status }
+            </span>
             <button
               type="button"
               onClick={ () => {} }
-              data-testid={ dataTestIds['47'] }
+              data-testid={ dataTestIds['57'] }
+            >
+              Preparar pedido
+            </button>
+            <button
+              type="button"
+              onClick={ () => {} }
+              data-testid={ dataTestIds['58'] }
               disabled
             >
-              { orderDetails.status === 'Pendente' ? 'Marcar como entregue' : 'Entregue' }
+              Saiu para entrega
+            </button>
+            <button
+              type="button"
+              onClick={ handlePing }
+            >
+              PINGA NI MIM
             </button>
           </div>
           <div>
@@ -51,7 +74,6 @@ const CustomerOrderDetails = () => {
             <span>Quantidade</span>
             <span>Valor Unitário</span>
             <span>Sub-total</span>
-            <span>Remover Item</span>
           </div>
           {
             orderDetails.products.map((product, index) => (
@@ -60,7 +82,7 @@ const CustomerOrderDetails = () => {
                 index={ index }
                 productNumber={ index + 1 }
                 name={ product.name }
-                testIds={ ['41', '42', '43', '44', '45'] }
+                testIds={ ['59', '60', '61', '62', '63'] }
                 info1={ product.SalesProducts.quantity }
                 info2={ product.price }
                 info3={ (product.SalesProducts.quantity * product.price) }
@@ -68,7 +90,7 @@ const CustomerOrderDetails = () => {
             ))
           }
 
-          <p data-testid={ dataTestIds['46'] }>
+          <p data-testid={ dataTestIds['64'] }>
             { formatNumber(calculateOrderTotalPrice(orderDetails.products
               .map(({ SalesProducts: { quantity }, price }) => ({ quantity, price })))) }
           </p>
@@ -78,4 +100,4 @@ const CustomerOrderDetails = () => {
   );
 };
 
-export default CustomerOrderDetails;
+export default SellerOrderDetails;

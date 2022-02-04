@@ -11,6 +11,7 @@ const AppRoutes = () => (
     <Route path="/customer/orders" element={ <Pages.CustomerOrders /> } />
     <Route path="/customer/orders/:id" element={ <Pages.CustomerOrderDetails /> } />
     <Route path="/seller/orders" element={ <Pages.SellerOrders /> } />
+    <Route path="/seller/orders/:id" element={ <Pages.SellerOrderDetails /> } />
     <Route path="/register" element={ <Pages.Register /> } />
   </Routes>
 );

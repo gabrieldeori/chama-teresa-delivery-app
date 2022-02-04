@@ -26,7 +26,7 @@ function Login() {
     if (user) {
       redirectToPath(navigate, user.role);
     }
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     const handleValidation = () => {
@@ -56,8 +56,6 @@ function Login() {
     if (dataFetch.status === NOT_FOUND) {
       setHidden(false);
     } else {
-      console.log(data);
-      console.log(dataFetch.status);
       localStorage.setItem('user', JSON.stringify(data));
       redirectToPath(navigate, data.role);
     }

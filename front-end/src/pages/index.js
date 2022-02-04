@@ -3,6 +3,7 @@ import CustomerProducts from './CustomerProducts';
 import CustomerCheckout from './CustomerCheckout';
 import CustomerOrders from './CustomerOrders';
 import SellerOrders from './SellerOrders';
+import SellerOrderDetails from './SellerOrderDetails';
 import CustomerOrderDetails from './CustomerOrderDetails';
 import Register from './Register';
 
@@ -12,6 +13,7 @@ export {
   CustomerCheckout,
   CustomerOrders,
   SellerOrders,
+  SellerOrderDetails,
   CustomerOrderDetails,
   Register,
 };

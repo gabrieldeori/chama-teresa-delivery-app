@@ -32,7 +32,11 @@ const OrderCard = (orderProps) => {
         <div className="order-middle-top">
           <OrderStatus status={ status } testId={ `${dataTestIds[testIds[1]]}${id}` } />
           <div className="order-date-total-price">
-            <p data-testid={ `${dataTestIds[testIds[2]]}${id}` }>{ formatDate(saleDate) }</p>
+            <p
+              data-testid={ `${dataTestIds[testIds[2]]}${id}` }
+            >
+              { formatDate(saleDate) }
+            </p>
             <p data-testid={ `${dataTestIds[testIds[3]]}${id}` }>{ formattedPrice }</p>
           </div>
         </div>

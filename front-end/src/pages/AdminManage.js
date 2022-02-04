@@ -8,7 +8,7 @@ import { navPages } from '../utils';
 const AdminManage = () => {
   const [users, setUsers] = useState([]);
 
-  useEffect(() => getUsers(setUsers));
+  useEffect(() => getUsers(setUsers), []);
 
   return (
     <>

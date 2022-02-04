@@ -7,10 +7,6 @@ import { getOrderById } from '../services';
 import { dataTestIds, navPages } from '../utils';
 import { calculateOrderTotalPrice, formatNumber, formatDate } from '../helpers';
 
-const { io } = require('socket.io-client');
-
-const socket = io('http://localhost:3001');
-
 const SellerOrderDetails = () => {
   const [orderDetails, setOrderDetails] = useState({
     id: '',

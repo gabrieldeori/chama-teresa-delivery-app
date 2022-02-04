@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
+import { getUsers } from '../../services';
 import { dataTestIds } from '../../utils';
 
 const CONFLICT = 409;
 const POST_REGISTER_URL = 'http://localhost:3001/register';
 
-const RegisterUserForm = () => {
+const RegisterUserForm = ({ callback }) => {
   const [registerUserForm, setRegisterUserForm] = useState({
     name: '',
     email: '',
@@ -55,6 +57,7 @@ const RegisterUserForm = () => {
       setHidden(false);
     } else {
       setHidden(true);
+      getUsers(callback);
     }
   };
 
@@ -112,6 +115,12 @@ const RegisterUserForm = () => {
       </p>
     </>
   );
+};
+
+const { func } = PropTypes;
+
+RegisterUserForm.propTypes = {
+  callback: func.isRequired,
 };
 
 export default RegisterUserForm;

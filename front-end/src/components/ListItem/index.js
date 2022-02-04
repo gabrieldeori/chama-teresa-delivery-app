@@ -37,8 +37,8 @@ const ListItem = (props) => {
             onClick={ () => callback(name) }
             data-testid={
               dataTestIds[testIds[5]]
-              ? `${dataTestIds[testIds[5]]}${index}`
-              : `${dataTestIds[testIds[4]]}${index}`
+                ? `${dataTestIds[testIds[5]]}${index}`
+                : `${dataTestIds[testIds[4]]}${index}`
             }
           >
             { btn }

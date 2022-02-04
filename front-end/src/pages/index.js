@@ -5,7 +5,6 @@ import CustomerOrders from './CustomerOrders';
 import SellerOrders from './SellerOrders';
 import SellerOrderDetails from './SellerOrderDetails';
 import CustomerOrderDetails from './CustomerOrderDetails';
-import SellerOrderDetails from './SellerOrderDetails';
 import AdminManage from './AdminManage';
 import Register from './Register';
 
@@ -17,7 +16,6 @@ export {
   SellerOrders,
   SellerOrderDetails,
   CustomerOrderDetails,
-  SellerOrderDetails,
   AdminManage,
   Register,
 };

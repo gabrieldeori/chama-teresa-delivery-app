@@ -1,10 +1,23 @@
 const services = require('../services');
 const utils = require('../utils');
 
-async function getAllUsers(req, res, nex) {
+async function getAllUsers(_req, res, nex) {
+  try {
+    const response = await services.users.getAllUsers();
+    if (response.error) return nex(response);
+    return res
+      .status(response.statusCode)
+      .json(response.sendToFrontEnd);
+  } catch (e) {
+    console.log(e);
+  }
+  return nex(utils.errors.internalServerError);
+}
+
+async function getAllUsersByRole(req, res, nex) {
   const { role } = req.params;
   try {
-    const response = await services.users.getAllUsers({ role });
+    const response = await services.users.getAllUsersByRole({ role });
     if (response.error) return nex(response);
 
     return res
@@ -57,9 +70,25 @@ async function register(req, res, nex) {
   return nex(utils.errors.internalServerError);
 }
 
+async function deleteUser(req, res, nex) {
+  try {
+    const { email } = req.body;
+    const { role } = req.user;
+    if (role !== 'administrator') return nex(utils.errors.notAdmin)
+    const response = await services.users.deleteUser(email);
+    if (!response || response.error) nex(response);
+    return res.status(response.statusCode).json(response.sendToFrontEnd);
+  } catch (e) {
+    console.log(e);
+  }
+  return nex(utils.errors.internalServerError);
+}
+
 module.exports = {
   getAllUsers,
+  getAllUsersByRole,
   getById,
   login,
   register,
+  deleteUser,
 };

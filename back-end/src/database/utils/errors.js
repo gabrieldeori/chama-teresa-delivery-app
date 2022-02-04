@@ -53,6 +53,14 @@ const errors = {
     error: { success: false, message: 'Não é vendedor ou não existe', data: null },
     statusCode: status.NOT_FOUND,
   },
+  notAdmin: {
+    error: { success: false, message: 'Não é administrador', data: null },
+    statusCode: status.UNAUTHORIZED,
+  },
+  notDeleted: {
+    error: { success: false, message: 'Não foi possível deletar ou não existe', data: null },
+    statusCode: status.NOT_FOUND,
+  },
 };
 
 module.exports = errors;

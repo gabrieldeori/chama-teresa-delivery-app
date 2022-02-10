@@ -5,8 +5,16 @@ import { Navbar, OrderCard } from '../components';
 import { getOrders } from '../services';
 import { navPages } from '../utils';
 
+const { io } = require('socket.io-client');
+
+const socket = io('http://localhost:3001');
+
 const CustomerOrders = () => {
   const [orders, setOrders] = useState([]);
+
+  socket.on('updateFrontStatus', () => {
+    getOrders(setOrders);
+  });
 
   useEffect(() => getOrders(setOrders), []);
 

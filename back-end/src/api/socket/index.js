@@ -1,8 +1,7 @@
-const ping = require('./ping');
+const updateStatus = require('./updateStatus');
 
 module.exports = (server) => {
   server.on('connection', (socket) => {
-    console.log(`Usuário: ${socket.id}`);
-    ping(server, socket);
+    updateStatus(server, socket);
   });
 };

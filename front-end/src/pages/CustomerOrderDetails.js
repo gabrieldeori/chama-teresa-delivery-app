@@ -7,6 +7,10 @@ import { getOrderById } from '../services';
 import { dataTestIds, navPages } from '../utils';
 import { calculateOrderTotalPrice, formatNumber, formatDate } from '../helpers';
 
+const { io } = require('socket.io-client');
+
+const socket = io('http://localhost:3001');
+
 const CustomerOrderDetails = () => {
   const [orderDetails, setOrderDetails] = useState({
     id: '',
@@ -16,6 +20,14 @@ const CustomerOrderDetails = () => {
     products: [],
   });
   const { id: paramsId } = useParams();
+
+  const handleUpdateStatus = (operation, status) => {
+    socket.emit(operation, { id: paramsId, status });
+  };
+
+  socket.on('updateFrontStatus', ({ status }) => {
+    setOrderDetails((previousState) => ({ ...previousState, status }));
+  });
 
   useEffect(() => getOrderById(setOrderDetails, paramsId), [paramsId]);
 
@@ -38,9 +50,9 @@ const CustomerOrderDetails = () => {
             <span data-testid={ dataTestIds['40'] }>{ orderDetails.status }</span>
             <button
               type="button"
-              onClick={ () => {} }
+              onClick={ () => { handleUpdateStatus('updateDbStatus', 'Entregue'); } }
               data-testid={ dataTestIds['47'] }
-              disabled
+              disabled={ orderDetails.status !== 'Em Trânsito' }
             >
               { orderDetails.status === 'Pendente' ? 'Marcar como entregue' : 'Entregue' }
             </button>

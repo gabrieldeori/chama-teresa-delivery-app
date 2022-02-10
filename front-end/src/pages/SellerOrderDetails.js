@@ -7,6 +7,10 @@ import { getOrderById } from '../services';
 import { dataTestIds, navPages } from '../utils';
 import { calculateOrderTotalPrice, formatNumber, formatDate } from '../helpers';
 
+const { io } = require('socket.io-client');
+
+const socket = io('http://localhost:3001');
+
 const SellerOrderDetails = () => {
   const [orderDetails, setOrderDetails] = useState({
     id: '',
@@ -15,6 +19,14 @@ const SellerOrderDetails = () => {
     products: [],
   });
   const { id: paramsId } = useParams();
+
+  const handleUpdateStatus = (operation, status) => {
+    socket.emit(operation, { id: paramsId, status });
+  };
+
+  socket.on('updateFrontStatus', ({ status }) => {
+    setOrderDetails((previousState) => ({ ...previousState, status }));
+  });
 
   useEffect(() => getOrderById(setOrderDetails, paramsId), [paramsId]);
 
@@ -40,16 +52,17 @@ const SellerOrderDetails = () => {
             </span>
             <button
               type="button"
-              onClick={ () => {} }
+              onClick={ () => { handleUpdateStatus('updateDbStatus', 'Preparando'); } }
               data-testid={ dataTestIds['57'] }
+              disabled={ orderDetails.status !== 'Pendente' }
             >
               Preparar pedido
             </button>
             <button
               type="button"
-              onClick={ () => {} }
+              onClick={ () => { handleUpdateStatus('updateDbStatus', 'Em Trânsito'); } }
               data-testid={ dataTestIds['58'] }
-              disabled
+              disabled={ orderDetails.status !== 'Preparando' }
             >
               Saiu para entrega
             </button>
